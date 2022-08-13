@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+<!-- -17.775906446111378, -63.19563034843979 -->
 <div class="container">
     <br>
     <br>
@@ -9,91 +9,97 @@
             <h2>Basureros</h2>
         </li>
         <li class="list-group-item">
-            <div class="card-body col-6">
-                <form method="POST" action="{{ route('dumps.create') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group row">
-                        <!-- <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('name') }}</label> -->
-                        <span>Nombre del basurero</span>
-                        <div class="col-md-6">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autofocus>
+            <div class="row">
+                <div class="col-5">
+                    <form method="POST" action="{{ route('dumps.create') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group row">
+                            <!-- <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('name') }}</label> -->
+                            <span>Nombre del basurero</span>
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autofocus>
 
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <!-- <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('name') }}</label> -->
-                        <span>Latitud</span>
-                        <div class="col-md-6">
-                            <input id="lat" type="text" class="form-control @error('lat') is-invalid @enderror" name="lat" value="{{ old('lat') }}" autofocus>
+                        <div class="form-group row">
+                            <!-- <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('name') }}</label> -->
+                            <span>Latitud</span>
+                            <div class="col-md-6">
+                                <input id="latitude" type="text" class="form-control @error('lat') is-invalid @enderror" name="lat" value="-17.775906446111378" autofocus>
 
-                            @error('lat')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                @error('lat')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <!-- <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('name') }}</label> -->
-                        <span>Longitud</span>
-                        <div class="col-md-6">
-                            <input id="long" type="text" class="form-control @error('long') is-invalid @enderror" name="long" value="{{ old('long') }}" autofocus>
+                        <div class="form-group row">
+                            <!-- <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('name') }}</label> -->
+                            <span>Longitud</span>
+                            <div class="col-md-6">
+                                <input id="longitude" type="text" class="form-control @error('long') is-invalid @enderror" name="long" value="-63.19563034843979" autofocus>
+                                @error('long')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="dumptype_id" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de basurero') }}</label>
+                            <div class="col-md-6">
+                                <select name="dumptype_id" id="dumptype_id">
+                                    <option value="">--selecciona tu tipo de basurero--</option>
+                                    @foreach ($dumpTypes as $dumpType)
+                                    <option value="{{$dumpType->id}}">{{" -> ".$dumpType->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('dumptype_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="faculty_id" class="col-md-4 col-form-label text-md-right">{{ __('Facultad') }}</label>
+                            <div class="col-md-6">
+                                <select name="faculty_id" id="faculty_id">
+                                    <option value="">--selecciona la facultad--</option>
+                                    @foreach ($faculties as $faculty)
+                                    <option value="{{$faculty->id}}">{{" -> ".$faculty->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('faculty_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row mb-0">
+                            <div class="col-6 ">
+                                <button type="submit" class="btn btn-success ">
+                                    {{ __('Registrar Nuevo Basurero') }}
+                                </button>
+                            </div>
+                        </div>
 
-                            @error('long')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+                    </form>
+                </div>
+                <div class="col-7">
+                    <div class="container">
+                        <div id="mapa" style="height: 500px ; width: 100%;"></div>
                     </div>
-                    <br>
-                    <div class="form-group row">
-                        <label for="dumptype_id" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de basurero') }}</label>
-                        <div class="col-md-6">
-                            <select name="dumptype_id" id="dumptype_id">
-                                <option value="">--selecciona tu tipo de basurero--</option>
-                                @foreach ($dumpTypes as $dumpType)
-                                <option value="{{$dumpType->id}}">{{" -> ".$dumpType->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('dumptype_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="faculty_id" class="col-md-4 col-form-label text-md-right">{{ __('Facultad') }}</label>
-                        <div class="col-md-6">
-                            <select name="faculty_id" id="faculty_id">
-                                <option value="">--selecciona la facultad--</option>
-                                @foreach ($faculties as $faculty)
-                                <option value="{{$faculty->id}}">{{" -> ".$faculty->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('faculty_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group row mb-0">
-                        <div class="col-6 ">
-                            <button type="submit" class="btn btn-success ">
-                                {{ __('Registrar Nuevo Basurero') }}
-                            </button>
-                        </div>
-                    </div>
-
-                </form>
+                </div>
             </div>
         </li>
     </ul>
@@ -128,4 +134,33 @@
     {{-- <div class="table table-striped">{{$users->links()}}
 </div>--}}
 </div>
+<script>
+    function iniciarMap() {
+        var latitud = -17.775906446111378;
+        var londitud = -63.19563034843979;
+        coordenadas = {
+            lng: londitud,
+            lat: latitud
+        }
+        generarMapa(coordenadas);
+
+        function generarMapa(coordenadas) {
+            var mapa = new google.maps.Map(document.getElementById('mapa'), {
+                zoom: 17,
+                center: new google.maps.LatLng(coordenadas.lat, coordenadas.lng)
+            });
+            marcador = new google.maps.Marker({
+                map: mapa,
+                draggable: true,
+                position: new google.maps.LatLng(coordenadas.lat, coordenadas.lng)
+            });
+            marcador.addListener('dragend', function(event) {
+                document.getElementById("latitude").value = this.getPosition().lat();
+                document.getElementById("longitude").value = this.getPosition().lng();
+            })
+        }
+
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
 @endsection

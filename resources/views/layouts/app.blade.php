@@ -59,6 +59,9 @@
                                 <a class="nav-link" href="{{ route('dumps.index') }}">{{ __('Basureros') }}</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('dumps.map') }}">{{ __('Mapa de Basureros') }}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('dumptypes.index') }}">{{ __('Tipos de basureros') }}</a>
                             </li>
                             <li class="nav-item dropdown">

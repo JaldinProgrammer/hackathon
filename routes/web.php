@@ -42,6 +42,7 @@ Route::group(['prefix' => 'faculties'], function () {
 Route::group(['prefix' => 'dumps'], function () {
     Route::get('index', [DumpController::class, 'index'])->name('dumps.index');
     Route::post('create', [DumpController::class, 'create'])->name('dumps.create');
+    Route::get('map', [DumpController::class, 'map'])->name('dumps.map');
 });
 
 Route::group(['prefix' => 'dumptypes'], function () {

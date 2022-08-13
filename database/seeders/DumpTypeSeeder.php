@@ -17,17 +17,17 @@ class DumpTypeSeeder extends Seeder
     {
         DB::table('dump_types')->insert([
             [
-                'name' => 'Motoyoe',
-                'dimension' => 85.5,
+                'name' => 'Basurero chico REY',
+                'dimension' => 45.5,
                 'materia' => 'plastico'
             ],
             [
-                'name' => 'Guajojo',
-                'dimension' => 45.5,
+                'name' => 'Basurero mediano CISCOPLAS',
+                'dimension' => 65.5,
                 'materia' => 'metal'
             ],
             [
-                'name' => 'Tacu',
+                'name' => 'Basurero grande REY',
                 'dimension' => 75.5,
                 'materia' => 'plastico'
             ],

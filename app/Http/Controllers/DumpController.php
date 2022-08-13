@@ -38,5 +38,9 @@ class DumpController extends Controller
         ]);
         return redirect()->route('dumps.index');
     }
+
+    public function map(){
+        
+    }
 }
 
