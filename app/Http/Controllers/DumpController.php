@@ -40,7 +40,11 @@ class DumpController extends Controller
     }
 
     public function map(){
-        
+        $dumps = Dump::all();
+        $dumps->load('dumpType');
+        $dumps->load('faculty');
+
+        return view('dumps.map', compact('dumps'));
     }
 }
 
